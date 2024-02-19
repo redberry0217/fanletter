@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-function Layout() {
+function Header() {
   return (
     <>
       <TitleBox>
@@ -34,4 +34,4 @@ const H1Style = styled.h1`
   margin-left: 70px;
 `;
 
-export default Layout;
+export default Header;

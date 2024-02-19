@@ -13,9 +13,11 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
+
   const accessToken = localStorage.getItem('accessToken');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
+  /** 이미 로그인 상태가 true인 경우 Home으로 이동 */
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
