@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
-import WriterDetail from "components/WriterDetail";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteLetter } from "../redux/modules/updateLetter";
-import { modifyLetter } from "../redux/modules/updateLetter";
-import Button from "components/common/Button";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
+import WriterDetail from 'components/WriterDetail';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteLetter } from '../redux/modules/updateLetter';
+import { modifyLetter } from '../redux/modules/updateLetter';
+import Button from 'components/common/Button';
 
 function Detail() {
   const letterData = useSelector((state) => state.updateLetter);
@@ -13,13 +13,11 @@ function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const letter = letterData.letters.find(
-    (letter) => letter.id.toString() === id
-  );
+  const letter = letterData.letters.find((letter) => letter.id.toString() === id);
   const toWhom = letter.writedTo;
 
   if (!letter) {
-    alert("해당 팬레터를 찾을 수 없습니다.");
+    alert('해당 팬레터를 찾을 수 없습니다.');
     navigate(`/`);
   }
 
@@ -27,14 +25,14 @@ function Detail() {
   const handleGobackClick = () => {
     navigate(`/`, {
       state: {
-        previousValue: toWhom,
-      },
+        previousValue: toWhom
+      }
     });
   };
 
   /** 삭제하기 버튼 */
   const handleDelete = (id) => {
-    const deleteConfirm = window.confirm("팬레터를 삭제하시겠습니까?");
+    const deleteConfirm = window.confirm('팬레터를 삭제하시겠습니까?');
     if (deleteConfirm) {
       dispatch(deleteLetter(id));
       handleGobackClick();
@@ -44,7 +42,7 @@ function Detail() {
   };
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editedContent, setEditedContent] = useState("");
+  const [editedContent, setEditedContent] = useState('');
 
   /** 수정하기 버튼 */
   const handleEditClick = () => {
@@ -56,24 +54,24 @@ function Detail() {
   const handleSaveClick = () => {
     // 입력된 값이 없을 때
     if (!editedContent) {
-      alert("내용을 입력해주세요.");
+      alert('내용을 입력해주세요.');
       return;
     }
     // 변경된 내용이 없을 때
     if (editedContent.trim() === letter.content.trim()) {
-      alert("변경된 내용이 없습니다.");
+      alert('변경된 내용이 없습니다.');
       return;
     }
 
     // 변경된 내용이 있을 때
-    dispatch(modifyLetter(letter.id, editedContent));
+    dispatch(modifyLetter({ letterId: letter.id, editedContent }));
+    alert('내용이 수정되었습니다.');
     setIsEditing(false);
-    setEditedContent("");
   };
 
   /** 수정하기 화면에서 취소하기 버튼 */
   const handleCancelClick = () => {
-    const cancelConfirm = window.confirm("팬레터 수정을 취소합니다.");
+    const cancelConfirm = window.confirm('팬레터 수정을 취소합니다.');
     if (cancelConfirm) {
       setIsEditing(false);
     } else {
@@ -82,7 +80,7 @@ function Detail() {
   };
 
   return (
-    <DetailBackground>
+    <DetailContainer>
       <DetailTitle>
         from MOA to <TxT>TOMORROW X TOGETHER</TxT>
       </DetailTitle>
@@ -115,16 +113,12 @@ function Detail() {
           )}
         </BtnsStyle>
       </DetailCard>
-      <Button
-        onClick={handleGobackClick}
-        title="홈으로 돌아갑니다"
-        text="🏠 돌아가기"
-      />
-    </DetailBackground>
+      <Button onClick={handleGobackClick} title="홈으로 돌아갑니다" text="🏠 돌아가기" />
+    </DetailContainer>
   );
 }
 
-const DetailBackground = styled.div`
+const DetailContainer = styled.div`
   background-color: #e9f7ff;
   height: 100vh;
   display: flex;
