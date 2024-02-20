@@ -1,7 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { userLogout } from '../redux/modules/authSlice';
 
 function Header() {
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(userLogout());
+  };
   return (
     <>
       <TitleBox>
@@ -9,6 +15,8 @@ function Header() {
           from MOA to
           <br />
           <TitlefontColor>TOMORROW X TOGETHER</TitlefontColor>
+          <br />
+          <Logout onClick={logoutHandler}>로그아웃</Logout>
         </H1Style>
       </TitleBox>
     </>
@@ -34,4 +42,9 @@ const H1Style = styled.h1`
   margin-left: 70px;
 `;
 
+const Logout = styled.span`
+  color: red;
+  font-size: 14pt;
+  cursor: pointer;
+`;
 export default Header;
