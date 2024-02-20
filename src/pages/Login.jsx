@@ -55,8 +55,9 @@ function Login() {
         password: password
       };
       const response = await api.post('/login', loginInfo);
-      dispatch(userLogin(response.accessToken));
-      localStorage.setItem('accessToken', response.accessToken);
+      dispatch(userLogin(response)); //리덕스에 정보를 보내고 로그인
+      localStorage.setItem('response', JSON.stringify(response)); //로컬스토리지에도 저장
+
       const loginCompleteMsg = () => {
         toast.success('로그인 되었습니다. 환영합니다!');
       };

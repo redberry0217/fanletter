@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Detail from '../pages/Detail';
 import Home from '../pages/Home';
 import Login from 'pages/Login';
@@ -17,11 +17,10 @@ const Router = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      dispatch(userLogin({ accessToken }));
+    const Storedresponse = JSON.parse(localStorage.getItem('response'));
+    if (Storedresponse) {
+      dispatch(userLogin(Storedresponse));
       console.log(`이미 로그인됨`);
-    } else {
     }
   }, [dispatch]);
 
