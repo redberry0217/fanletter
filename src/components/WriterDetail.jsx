@@ -1,21 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { getFormatDate } from "util/date";
+import React from 'react';
+import styled from 'styled-components';
+import { getFormatDate } from 'util/date';
 
 function WriterDetail({ letter }) {
   return (
     <div>
       <WriteInfo>
-        <img
-          src={
-            letter.avatar.startsWith("http")
-              ? letter.avatar
-              : `/${letter.avatar}`
-          }
-          width="50"
-          alt="사용자 이미지"
-          style={{ borderRadius: "50%" }}
-        />
+        <img src={letter.avatar} width="50" alt="사용자 이미지" style={{ borderRadius: '50%' }} />
         <NicknameStyle>{letter.nickname}</NicknameStyle>
         <CreateAtStyle>{getFormatDate(letter.createdAt)}</CreateAtStyle>
       </WriteInfo>

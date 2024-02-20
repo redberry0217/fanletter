@@ -1,3 +1,76 @@
 {
-	"letters": []
+  "letters": [
+    {
+      "id": "9f3397c2-26b9-42ac-b0d1-1bc813abbc8e",
+      "createdAt": "2024-02-20T12:41:14.556Z",
+      "content": "ㅇㅇㅇ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": null
+    },
+    {
+      "id": "626c5150-bd81-4054-8610-79403c669b2a",
+      "createdAt": "2024-02-20T12:41:33.656Z",
+      "content": "ㅁㄴㅇㅁㄴㅇ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": null
+    },
+    {
+      "id": "1dfd6709-4a74-4e03-b503-985c07b127dd",
+      "createdAt": "2024-02-20T12:41:39.632Z",
+      "content": "ㅁㄴㅇㅁㄴㅇ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": null
+    },
+    {
+      "id": "e2aa5340-700f-47f8-bed0-0c4b371ea26b",
+      "createdAt": "2024-02-20T12:42:13.877Z",
+      "content": "ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": null
+    },
+    {
+      "id": "4d483677-0e25-45d4-b389-0f2310f73e7f",
+      "createdAt": "2024-02-20T13:17:30.640Z",
+      "content": "안뇽안뇽",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": null
+    },
+    {
+      "id": "95cf71f4-bbc4-41da-bb28-94673ec71db7",
+      "createdAt": "2024-02-20T13:27:01.224Z",
+      "content": "오옷 오오옷",
+      "writedTo": "YEONJUN",
+      "userId": "cafelatte",
+      "nickname": "카페라떼",
+      "avatar": null
+    },
+    {
+      "id": "27690501-0d79-4893-b150-5df186036f6b",
+      "createdAt": "2024-02-20T13:27:12.514Z",
+      "content": "오옷 오오옷",
+      "writedTo": "SOOBIN",
+      "userId": "cafelatte",
+      "nickname": "카페라떼",
+      "avatar": null
+    },
+    {
+      "id": "4a555322-773e-446a-8c7e-afdc3ae6b874",
+      "createdAt": "2024-02-20T13:27:58.938Z",
+      "content": "으아아아 으아아",
+      "writedTo": "SOOBIN",
+      "userId": "smoothie",
+      "nickname": "스무디",
+      "avatar": null
+    }
+  ]
 }

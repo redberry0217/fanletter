@@ -1,18 +1,33 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import NoLettersYet from "./NoLettersYet";
-import { useSelector } from "react-redux";
-import { getFormatDate } from "util/date";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import NoLettersYet from './NoLettersYet';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFormatDate } from 'util/date';
+import { __getLetter } from '../redux/modules/updateLetter';
 
 function LetterList({ activeMember }) {
   const navigate = useNavigate();
-  const letterData = useSelector((state) => state.updateLetter);
+  const dispatch = useDispatch();
+  const { isLoading, error, letters } = useSelector((state) => state.updateLetter);
+  console.log('스토어로 전달된 팬레터', letters);
+  console.log('스토어로 전달된 로딩상태', isLoading);
+  console.log('스토어로 전달된 에러', error);
+
+  useEffect(() => {
+    dispatch(__getLetter());
+  }, []);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
-  const filteredLetters = letterData.letters.filter(
-    (letter) => letter.writedTo === activeMember
-  );
+  const filteredLetters = letters.filter((letter) => letter.writedTo === activeMember);
   const handleCardClick = (id) => {
     navigate(`/detail/${id}`);
   };
@@ -23,19 +38,9 @@ function LetterList({ activeMember }) {
         <NoLettersYet activeMember={activeMember} />
       ) : (
         filteredLetters.map((letter) => (
-          <LetterCard
-            key={letter.id}
-            onClick={() =>
-              handleCardClick(letter.id, letterData.letters, activeMember)
-            }
-          >
+          <LetterCard key={letter.id} onClick={() => handleCardClick(letter.id)}>
             <div>
-              <img
-                src={letter.avatar}
-                alt="사용자 아바타"
-                width="50"
-                style={{ borderRadius: "50%" }}
-              />
+              <img src={letter.avatar} alt="사용자 아바타" width="50" style={{ borderRadius: '50%' }} />
             </div>
             <CardContent>
               <NickName>{letter.nickname}</NickName>
@@ -73,6 +78,7 @@ const CardContent = styled.div`
 const NickName = styled.p`
   font-weight: bold;
   line-height: 1;
+  color: #4b85d0;
 `;
 
 const Letter = styled.p`

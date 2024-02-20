@@ -1,12 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { userLogout } from '../redux/modules/authSlice';
 
 function Header() {
   return (
     <>
-      <TitleBox></TitleBox>
+      <TitleBox />
     </>
   );
 }

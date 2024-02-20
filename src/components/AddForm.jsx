@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { addLetter } from '../redux/modules/updateLetter';
 import Button from './common/Button';
+import { __addLetter } from '../redux/modules/updateLetter';
 
 function AddForm({ setActiveMember }) {
   const dispatch = useDispatch();
   const [writedTo, setWritedTo] = useState('SOOBIN');
   const [content, setContent] = useState('');
-  const nickname = useSelector((state) => state.auth.nickname);
+  const { nickname, userId, avatar } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,12 +24,13 @@ function AddForm({ setActiveMember }) {
         content,
         writedTo,
         id: uuidv4(),
-        avatar: 'assets/user_icon.png'
+        userId: userId,
+        nickname: nickname,
+        avatar: avatar
       };
-      dispatch(addLetter(newLetter));
+      dispatch(__addLetter(newLetter));
       setContent('');
       setWritedTo('SOOBIN');
-
       setActiveMember(writedTo);
     }
   };

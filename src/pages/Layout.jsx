@@ -16,7 +16,7 @@ function Layout() {
     <>
       <LayoutContainer>
         <GoHome to="/" title="HOME">
-          From MOA to TXT
+          💚From MOA to TXT
         </GoHome>
         <MyInfoContainer>
           <MyProfile to="/profile">내 프로필</MyProfile>
@@ -37,7 +37,7 @@ const LayoutContainer = styled.div`
 `;
 
 const GoHome = styled(Link)`
-  color: black;
+  color: #4b85d0;
   font-weight: 600;
   text-decoration: none;
   margin-left: 50px;
@@ -45,7 +45,7 @@ const GoHome = styled(Link)`
 
 const MyInfoContainer = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 30px;
   margin-right: 50px;
 `;
 const MyProfile = styled(Link)`
