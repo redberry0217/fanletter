@@ -14,18 +14,17 @@ function Login() {
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
 
-  const accessToken = localStorage.getItem('accessToken');
+  // const accessToken = localStorage.getItem('accessToken');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /** 이미 로그인 상태가 true인 경우 Home으로 이동 */
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/');
     }
-  }, [isLoggedIn]);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  }, [isLoggedIn, navigate]);
 
   const toggleForm = () => {
     setShowLoginForm((prevState) => !prevState);
@@ -55,8 +54,9 @@ function Login() {
         id: id,
         password: password
       };
-      await api.post('/login', loginInfo);
-      dispatch(userLogin(accessToken));
+      const response = await api.post('/login', loginInfo);
+      dispatch(userLogin(response.accessToken));
+      localStorage.setItem('accessToken', response.accessToken);
       const loginCompleteMsg = () => {
         toast.success('로그인 되었습니다. 환영합니다!');
       };

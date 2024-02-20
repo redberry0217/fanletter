@@ -18,8 +18,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function (response) {
     console.log(`인터셉터 응답 받음`);
-    const { accessToken } = response.data;
-    localStorage.setItem('accessToken', accessToken);
+    // const { accessToken } = response.data; //토큰이 정상적이니지 확인
     return response.data;
   },
   function (error) {
