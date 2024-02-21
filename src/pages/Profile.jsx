@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/common/Button';
 import { useRef } from 'react';
+import api from '../axios/api';
+import { editUserInfo } from '../redux/modules/authSlice';
 
 function Profile() {
-  const { userId, nickname: initialNickname, avatar: initialAvatar } = useSelector((state) => state.auth);
+  const { userId, nickname: initialNickname, avatar: initialAvatar, accessToken } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setMyAvatar] = useState(initialAvatar);
   const [nickname, setNickname] = useState(initialNickname);
+  const [myFile, setMyFile] = useState(null);
+  const dispatch = useDispatch();
 
   /** 수정하기 버튼 클릭시 */
   const handleEditClick = () => {
@@ -28,6 +32,10 @@ function Profile() {
     fileInputRef.current.click();
   };
 
+  const formData = new FormData();
+  formData.append('avatar', avatar);
+  formData.append('nickname', nickname);
+
   // 아바타 이미지 업로드
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -35,21 +43,20 @@ function Profile() {
       console.log('선택한 파일', file);
       const fileUrl = URL.createObjectURL(file);
       setMyAvatar(fileUrl);
+      setMyFile(file);
+      setIsEditing(false);
     }
   };
 
   const EditCompleteHandler = async () => {
     try {
-      const editInfo = {
-        nickname: nickname,
-        avatar: avatar
-      };
-      const response = await api.patch('/profile', {
+      const response = await api.patch('/profile', formData, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`
         }
       });
-      dispatch;
+      dispatch(editUserInfo({ nickname: nickname, avatar: avatar }));
     } catch (error) {}
   };
 
@@ -132,20 +139,6 @@ const MyNickname = styled.div`
 `;
 
 const MyId = styled.div``;
-
-const BlueButton = styled.button`
-  height: 40px;
-  width: 80%;
-  border: none;
-  border-radius: 15px;
-  background-color: #4b85d0;
-  color: white;
-  margin: auto;
-  margin-top: 20px;
-  font-size: 13pt;
-  font-weight: 600;
-  cursor: pointer;
-`;
 
 const Btn = styled.div`
   display: flex;

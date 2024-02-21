@@ -1,24 +1,6 @@
 {
   "letters": [
     {
-      "id": "61d4f2f9-ac51-40db-90c4-a35517e8e09d",
-      "createdAt": "2024-02-20T16:01:22.454Z",
-      "content": "으메리카노",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노",
-      "avatar": null
-    },
-    {
-      "id": "29134920-74ad-4e84-a4f3-66d16e10280c",
-      "createdAt": "2024-02-20T16:16:12.745Z",
-      "content": "카페라떼의 새로운 글 ㅎ",
-      "writedTo": "SOOBIN",
-      "userId": "cafelatte",
-      "nickname": "카페라떼",
-      "avatar": null
-    },
-    {
       "id": "f714942d-08cd-40f9-b948-7bdecb984b18",
       "createdAt": "2024-02-21T03:34:47.994Z",
       "content": "ㅇㅇㅇ",
@@ -26,6 +8,24 @@
       "userId": "cafemocha",
       "nickname": "카페모카",
       "avatar": "/static/media/user_icon.269aeae61bf344d75935.png"
+    },
+    {
+      "id": "3798465c-3394-4b0d-b2a8-105eb2fba146",
+      "createdAt": "2024-02-21T08:30:47.224Z",
+      "content": "asd",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노111",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+    },
+    {
+      "id": "bfb3f527-2bc2-4bf6-8463-f67563809cad",
+      "createdAt": "2024-02-21T09:38:48.266Z",
+      "content": "111",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노111",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
     }
   ]
 }

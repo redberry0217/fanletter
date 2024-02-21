@@ -32,9 +32,14 @@ const authSlice = createSlice({
       state.nickname = '';
       state.avatar = '';
       localStorage.removeItem('response');
+    },
+    editUserInfo: (state, action) => {
+      const response = action.payload;
+      state.nickname = response.nickname;
+      state.avatar = response.avatar;
     }
   }
 });
 
 export default authSlice.reducer;
-export const { userLogin, userLogout } = authSlice.actions;
+export const { userLogin, userLogout, editUserInfo } = authSlice.actions;
