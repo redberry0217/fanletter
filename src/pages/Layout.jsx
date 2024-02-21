@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import axios from 'axios';
 function Layout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const storedResponse = JSON.parse(localStorage.getItem('response'));
   const accessToken = storedResponse.accessToken;
 
@@ -28,7 +29,7 @@ function Layout() {
         console.log(`토큰 잘 살아있어요~`);
       } catch (error) {
         console.error('로그인 확인 실패:', error);
-        navigate(`/login`);
+        navigate(`/`);
       }
     };
     checkAccessToken();

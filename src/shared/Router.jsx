@@ -18,10 +18,10 @@ const Router = () => {
   const accessToken = storedresponse ? storedresponse.accessToken : null;
 
   const { isLoggedIn, nickname, avatar } = useSelector((state) => state.auth);
-  console.log('렌더링시 로그인 여부', isLoggedIn);
-  console.log('렌더링시 토큰', accessToken);
-  console.log('렌더링시 닉네임', nickname);
-  console.log('렌더링시 아바타', avatar);
+  // console.log('렌더링시 로그인 여부', isLoggedIn);
+  // console.log('렌더링시 토큰', accessToken);
+  // console.log('렌더링시 닉네임', nickname);
+  // console.log('렌더링시 아바타', avatar);
 
   return (
     <BrowserRouter>

@@ -62,6 +62,15 @@
       "userId": "americano",
       "nickname": "아메리카노777",
       "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/4e26650a-c471-48f9-aed3-0e76f9af48c3.jpg"
+    },
+    {
+      "id": "8ee2c6c6-b538-4984-9dbc-b2932426e244",
+      "createdAt": "2024-02-21T11:26:16.188Z",
+      "content": "으어어 거의 다돼가는듯 ㅠ",
+      "writedTo": "SOOBIN",
+      "userId": "cafelatte",
+      "nickname": "카페라떼",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/5b5fad95-3680-4ed0-94d0-76ea0469772a.jpg"
     }
   ]
 }
