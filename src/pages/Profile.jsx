@@ -5,12 +5,16 @@ import Button from 'components/common/Button';
 import { useRef } from 'react';
 import api from '../axios/api';
 import { editUserInfo } from '../redux/modules/authSlice';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function Profile() {
   const { userId, nickname: initialNickname, avatar: initialAvatar, accessToken } = useSelector((state) => state.auth);
+  const nicknick = useSelector((state) => state.auth.nickname);
+  const avaava = useSelector((state) => state.auth.avatar);
   const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [avatar, setMyAvatar] = useState(initialAvatar);
+  const [avatar, setAvatar] = useState(initialAvatar);
   const [nickname, setNickname] = useState(initialNickname);
   const [myFile, setMyFile] = useState(null);
   const dispatch = useDispatch();
@@ -31,32 +35,47 @@ function Profile() {
     fileInputRef.current.click();
   };
 
-  const formData = new FormData();
-  formData.append('avatar', avatar);
-  formData.append('nickname', nickname);
-
   // 아바타 이미지 업로드
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       console.log('선택한 파일', file);
       const fileUrl = URL.createObjectURL(file);
-      setMyAvatar(fileUrl);
+      setAvatar(fileUrl);
       setMyFile(file);
-      setIsEditing(false);
     }
   };
 
+  // 정보 수정하기 버튼
   const EditCompleteHandler = async () => {
     try {
-      const response = await api.patch('/profile', formData, {
+      const formData = new FormData();
+      formData.append('avatar', myFile);
+      formData.append('nickname', nickname);
+
+      const response = await api.patch(`/profile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`
         }
       });
-      dispatch(editUserInfo({ nickname: nickname, avatar: avatar }));
-    } catch (error) {}
+      dispatch(editUserInfo({ nickname: response.nickname, avatar: response.avatar }));
+
+      const storedResponse = JSON.parse(localStorage.getItem('response'));
+      if (storedResponse) {
+        const updatedResponse = {
+          ...storedResponse,
+          nickname: response.nickname,
+          avatar: response.avatar
+        };
+        localStorage.setItem('response', JSON.stringify(updatedResponse));
+      }
+      toast.success(`정보가 수정되었습니다.`);
+      setIsEditing(false);
+    } catch (error) {
+      toast.error(`정보 수정에 실패했습니다.`);
+      console.log(error);
+    }
   };
 
   return (

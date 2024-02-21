@@ -53,6 +53,15 @@
       "userId": "americano",
       "nickname": "아메리카노222",
       "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+    },
+    {
+      "id": "f2d918a2-8eba-472d-b805-b369343e79d3",
+      "createdAt": "2024-02-21T10:53:42.792Z",
+      "content": "ddd",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노777",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/4e26650a-c471-48f9-aed3-0e76f9af48c3.jpg"
     }
   ]
 }

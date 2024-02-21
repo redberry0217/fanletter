@@ -4,7 +4,6 @@ import axios from 'axios';
 export const __getLetter = createAsyncThunk('GET_LETTER', async (payload, thunkAPI) => {
   try {
     const response = await axios.get('http://localhost:5000/letters?_sort=-createdAt');
-    console.log('첨에 서버에서 가져온 팬레터', response.data);
     return thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
