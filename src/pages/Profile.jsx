@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/common/Button';
 import { useRef } from 'react';
+import api from '../axios/api';
+import { userInfoEdit } from '../redux/modules/authSlice';
 
 function Profile() {
-  const { userId, nickname: initialNickname, avatar: initialAvatar } = useSelector((state) => state.auth);
+  const { userId, nickname: initialNickname, avatar: initialAvatar, accessToken } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
   const [avatar, setMyAvatar] = useState(initialAvatar);
   const [nickname, setNickname] = useState(initialNickname);
+  const [myfile, setMyfile] = useState(null);
+
+  const dispatch = useDispatch();
 
   /** 수정하기 버튼 클릭시 */
   const handleEditClick = () => {
@@ -35,21 +40,28 @@ function Profile() {
       console.log('선택한 파일', file);
       const fileUrl = URL.createObjectURL(file);
       setMyAvatar(fileUrl);
+      setMyfile(file);
     }
   };
 
   const EditCompleteHandler = async () => {
     try {
-      const editInfo = {
-        nickname: nickname,
-        avatar: avatar
-      };
-      const response = await api.patch('/profile', {
+      const formData = new FormData();
+      formData.append('avatar', myfile);
+      formData.append('nickname', nickname);
+
+      const response = await api.patch('/profile', formData, {
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`
         }
       });
-      dispatch;
+      console.log('수정되었을까?', response);
+      dispatch(userInfoEdit({ nickname: nickname, avatar: avatar }));
+      localStorage.setItem('response', JSON.stringify(response));
+      setIsEditing(false);
+      console.log('변경된닉네임', nickname);
+      console.log('변경된아바타', avatar);
     } catch (error) {}
   };
 
@@ -121,7 +133,7 @@ const ProfileCard = styled.div`
 `;
 
 const MyAvatar = styled.div`
-  height: 100px;
+  height: 150px;
   margin: 20px;
 `;
 

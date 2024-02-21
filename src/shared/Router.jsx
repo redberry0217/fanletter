@@ -9,27 +9,30 @@ import { useEffect } from 'react';
 import { userLogin } from '../redux/modules/authSlice';
 
 const Router = () => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const token = useSelector((state) => state.auth.accessToken);
+  const { isLoggedIn, nickname, avatar } = useSelector((state) => state.auth);
+  const storedData = JSON.parse(localStorage.getItem('response'));
+  const accessToken = storedData.accessToken;
+
   console.log('렌더링시 로그인 여부', isLoggedIn);
-  console.log('렌더링시 토큰', token);
+  console.log('렌더링시 닉네임', nickname);
+  console.log('렌더링시 아바타', avatar);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const Storedresponse = JSON.parse(localStorage.getItem('response'));
-    if (Storedresponse) {
-      dispatch(userLogin(Storedresponse));
-      console.log(`이미 로그인됨`);
-    }
-  }, [dispatch]);
+  // redux persist로 바꾸기
+  // useEffect(() => {
+  //   const Storedresponse = JSON.parse(localStorage.getItem('response'));
+  //   if (Storedresponse) {
+  //     dispatch(userLogin(Storedresponse));
+  //   }
+  // }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Routes>
         {isLoggedIn ? (
           <>
-            <Route element={<Layout />} path="/">
+            <Route element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/detail/:id" element={<Detail />} />

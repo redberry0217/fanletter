@@ -12,25 +12,9 @@ function LetterList({ activeMember }) {
   const dispatch = useDispatch();
   const { isLoading, error, letters } = useSelector((state) => state.updateLetter);
   const { accessToken } = useSelector((state) => state.auth);
-  console.log('스토어로 전달된 팬레터', letters);
-  console.log('스토어로 전달된 로딩상태', isLoading);
-  console.log('스토어로 전달된 에러', error);
 
   useEffect(() => {
-    const checkAccessToken = async () => {
-      try {
-        await axios.get('https://moneyfulpublicpolicy.co.kr/user', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
-        dispatch(__getLetter());
-      } catch (error) {
-        console.error('로그인 확인 실패:', error);
-        navigate(`/login`);
-      }
-    };
-    checkAccessToken();
+    dispatch(__getLetter());
   }, [dispatch, accessToken]);
 
   if (isLoading) {
@@ -55,7 +39,7 @@ function LetterList({ activeMember }) {
         filteredLetters.map((letter) => (
           <LetterCard key={letter.id} onClick={() => handleCardClick(letter.id)}>
             <div>
-              <img src={letter.avatar} alt="사용자 아바타" width="50" style={{ borderRadius: '50%' }} />
+              <img src={letter.avatar} alt="사용자 아바타" width="70" style={{ borderRadius: '50%' }} />
             </div>
             <CardContent>
               <NickName>{letter.nickname}</NickName>
