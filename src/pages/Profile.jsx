@@ -57,6 +57,7 @@ function Profile() {
           Authorization: `Bearer ${accessToken}`
         }
       });
+
       const lettersResponse = await axios.get('http://localhost:5000/letters');
       const letters = lettersResponse.data;
 
@@ -167,7 +168,7 @@ const ProfileCard = styled.div`
 `;
 
 const MyAvatar = styled.div`
-  height: 100px;
+  height: 150px;
   margin: 20px;
 `;
 

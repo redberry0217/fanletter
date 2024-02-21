@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../redux/modules/authSlice';
 import axios from 'axios';
 

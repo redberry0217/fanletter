@@ -28,7 +28,7 @@ const Router = () => {
       <Routes>
         {accessToken ? (
           <>
-            <Route element={<Layout />} path="/">
+            <Route element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/detail/:id" element={<Detail />} />
