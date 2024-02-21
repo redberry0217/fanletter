@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import WriterDetail from 'components/WriterDetail';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteLetter } from '../redux/modules/updateLetter';
-import { modifyLetter } from '../redux/modules/updateLetter';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/common/Button';
+import { __deleteLetter } from '../redux/modules/updateLetter';
+import { __modifyLetter } from '../redux/modules/updateLetter';
+import { toast } from 'react-toastify';
 
 function Detail() {
-  const letterData = useSelector((state) => state.updateLetter);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { letters } = useSelector((state) => state.updateLetter);
+  const { userId } = useSelector((state) => state.auth);
   const { id } = useParams();
 
-  const letter = letterData.letters.find((letter) => letter.id.toString() === id);
+  const letter = letters.find((letter) => letter.id.toString() === id);
+  const isSameUser = letter.userId === userId;
   const toWhom = letter.writedTo;
 
   if (!letter) {
@@ -34,8 +38,9 @@ function Detail() {
   const handleDelete = (id) => {
     const deleteConfirm = window.confirm('팬레터를 삭제하시겠습니까?');
     if (deleteConfirm) {
-      dispatch(deleteLetter(id));
+      dispatch(__deleteLetter(id));
       handleGobackClick();
+      toast.success(`팬레터가 삭제되었습니다.`);
     } else {
       return;
     }
@@ -54,18 +59,18 @@ function Detail() {
   const handleSaveClick = () => {
     // 입력된 값이 없을 때
     if (!editedContent) {
-      alert('내용을 입력해주세요.');
+      toast.warning(`내용을 입력해주세요.`);
       return;
     }
     // 변경된 내용이 없을 때
     if (editedContent.trim() === letter.content.trim()) {
-      alert('변경된 내용이 없습니다.');
+      toast.warning(`변경된 내용이 없습니다.`);
       return;
     }
 
     // 변경된 내용이 있을 때
-    dispatch(modifyLetter({ letterId: letter.id, editedContent }));
-    alert('내용이 수정되었습니다.');
+    dispatch(__modifyLetter({ letterId: letter.id, editedContent }));
+    toast.success(`팬레터가 수정되었습니다.`);
     setIsEditing(false);
   };
 
@@ -100,18 +105,20 @@ function Detail() {
         ) : (
           <ContentStyle>{letter.content}</ContentStyle>
         )}
-        <BtnsStyle>
-          {isEditing ? (
-            <Button onClick={handleSaveClick} text="✔️저장하기" />
-          ) : (
-            <Button onClick={handleEditClick} text="✏️수정하기" />
-          )}
-          {isEditing ? (
-            <Button onClick={handleCancelClick} text="✖️취소하기" />
-          ) : (
-            <Button onClick={() => handleDelete(letter.id)} text="❌삭제하기" />
-          )}
-        </BtnsStyle>
+        {isSameUser && (
+          <BtnsStyle>
+            {isEditing ? (
+              <Button onClick={handleSaveClick} text="✔️저장하기" />
+            ) : (
+              <Button onClick={handleEditClick} text="✏️수정하기" />
+            )}
+            {isEditing ? (
+              <Button onClick={handleCancelClick} text="✖️취소하기" />
+            ) : (
+              <Button onClick={() => handleDelete(letter.id)} text="❌삭제하기" />
+            )}
+          </BtnsStyle>
+        )}
       </DetailCard>
       <Button onClick={handleGobackClick} title="홈으로 돌아갑니다" text="🏠 돌아가기" />
     </DetailContainer>
@@ -140,7 +147,7 @@ const DetailCard = styled.div`
   background-color: #ffffff;
   border-radius: 15px;
   width: 800px;
-  height: 470px;
+  height: 350px;
   margin: 35px;
   padding: 30px;
   display: flex;
@@ -169,14 +176,14 @@ const BtnsStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-right: 10px;
   text-align: right;
   gap: 12px;
 `;
 
 const TextareaStyle = styled.textarea`
-  height: 200px;
+  height: 150px;
   padding: 5px;
   border: 1px solid grey;
   border-radius: 7px;

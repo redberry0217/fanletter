@@ -5,25 +5,40 @@ import NoLettersYet from './NoLettersYet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormatDate } from 'util/date';
 import { __getLetter } from '../redux/modules/updateLetter';
+import axios from 'axios';
 
 function LetterList({ activeMember }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, error, letters } = useSelector((state) => state.updateLetter);
+  const { accessToken } = useSelector((state) => state.auth);
   console.log('스토어로 전달된 팬레터', letters);
   console.log('스토어로 전달된 로딩상태', isLoading);
   console.log('스토어로 전달된 에러', error);
 
   useEffect(() => {
-    dispatch(__getLetter());
-  }, []);
+    const checkAccessToken = async () => {
+      try {
+        await axios.get('https://moneyfulpublicpolicy.co.kr/user', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        dispatch(__getLetter());
+      } catch (error) {
+        console.error('로그인 확인 실패:', error);
+        navigate(`/login`);
+      }
+    };
+    checkAccessToken();
+  }, [dispatch, accessToken]);
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return <LoadingMsg>로딩 중...</LoadingMsg>;
   }
 
   if (error) {
-    return <div>{error.message}</div>;
+    return <LoadingMsg>팬레터를 불러오지 못했습니다. 잠시 후 다시 시도하세요.</LoadingMsg>;
   }
 
   /** 클릭한 멤버에게 쓴 팬레터만 필터링 */
@@ -95,6 +110,11 @@ const WriteDate = styled.p`
   text-align: right;
   line-height: 1;
   margin-top: 35px;
+`;
+
+const LoadingMsg = styled.div`
+  text-align: center;
+  margin-top: 50px;
 `;
 
 export default LetterList;

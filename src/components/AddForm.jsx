@@ -2,37 +2,55 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { addLetter } from '../redux/modules/updateLetter';
 import Button from './common/Button';
 import { __addLetter } from '../redux/modules/updateLetter';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function AddForm({ setActiveMember }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [writedTo, setWritedTo] = useState('SOOBIN');
   const [content, setContent] = useState('');
   const { nickname, userId, avatar } = useSelector((state) => state.auth);
+  const { accessToken } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const checkAccessToken = async () => {
+      try {
+        await axios.get('https://moneyfulpublicpolicy.co.kr/user', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
 
-    if (!content) {
-      alert('내용을 입력하세요.');
-    } else {
-      const currentDate = new Date();
-      const newLetter = {
-        createdAt: currentDate.toISOString(),
-        content,
-        writedTo,
-        id: uuidv4(),
-        userId: userId,
-        nickname: nickname,
-        avatar: avatar
-      };
-      dispatch(__addLetter(newLetter));
-      setContent('');
-      setWritedTo('SOOBIN');
-      setActiveMember(writedTo);
-    }
+        if (!content) {
+          toast.warning(`내용을 입력해주세요.`);
+        } else {
+          const currentDate = new Date();
+          const newLetter = {
+            createdAt: currentDate.toISOString(),
+            content,
+            writedTo,
+            id: uuidv4(),
+            userId: userId,
+            nickname: nickname,
+            avatar: avatar
+          };
+          dispatch(__addLetter(newLetter));
+          setContent('');
+          setWritedTo('SOOBIN');
+          setActiveMember(writedTo);
+          toast.success(`게시글이 등록되었습니다.`);
+        }
+      } catch (error) {
+        console.error('로그인 확인 실패:', error);
+        navigate(`/login`);
+      }
+    };
+    checkAccessToken();
   };
   return (
     <WriteBox>
@@ -50,10 +68,8 @@ function AddForm({ setActiveMember }) {
           </StyledSelect>
         </NicknameContainer>
         <div>
-          <label>내용</label>
-          <br />
           <StyledTextarea
-            placeholder="최대 100자 작성 가능"
+            placeholder="팬레터 내용은 최대 100자 작성 가능합니다."
             maxLength="100"
             value={content}
             onChange={(e) => setContent(e.target.value)}

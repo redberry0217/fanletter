@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import txtImage from 'assets/txt.jpg';
 
 function Header() {
   return (
@@ -15,7 +16,7 @@ const TitleBox = styled.div`
   display: flex;
   align-items: center;
   height: 230px;
-  background-image: url(${process.env.PUBLIC_URL}/assets/txt.jpg);
+  background-image: url(${txtImage});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
