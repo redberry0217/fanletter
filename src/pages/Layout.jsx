@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../redux/modules/authSlice';
+import axios from 'axios';
 
 function Layout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const storedResponse = JSON.parse(localStorage.getItem('response'));
+  const accessToken = storedResponse.accessToken;
+
   const logoutHandler = () => {
     dispatch(userLogout());
     navigate(`/`);
   };
+
+  useEffect(() => {
+    const checkAccessToken = async () => {
+      try {
+        await axios.get('https://moneyfulpublicpolicy.co.kr/user', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        console.log(`토큰 잘 살아있어요~`);
+      } catch (error) {
+        console.error('로그인 확인 실패:', error);
+        navigate(`/login`);
+      }
+    };
+    checkAccessToken();
+  }, [navigate]);
+
   return (
     <>
       <LayoutContainer>

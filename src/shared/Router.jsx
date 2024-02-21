@@ -8,26 +8,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { userLogin } from '../redux/modules/authSlice';
 
+/** 라우터 레벨에서는 useNavigate 사용 불가능 */
 const Router = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const token = useSelector((state) => state.auth.accessToken);
+  const storedresponse = JSON.parse(localStorage.getItem('response'));
+  const accessToken = storedresponse ? storedresponse.accessToken : null;
   console.log('렌더링시 로그인 여부', isLoggedIn);
-  console.log('렌더링시 토큰', token);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const Storedresponse = JSON.parse(localStorage.getItem('response'));
-    if (Storedresponse) {
-      dispatch(userLogin(Storedresponse));
-      console.log(`이미 로그인됨`);
-    }
-  }, [dispatch]);
+  console.log('렌더링시 토큰', accessToken);
 
   return (
     <BrowserRouter>
       <Routes>
-        {isLoggedIn ? (
+        {accessToken ? (
           <>
             <Route element={<Layout />} path="/">
               <Route index element={<Home />} />

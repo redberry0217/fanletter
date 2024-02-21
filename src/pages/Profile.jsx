@@ -26,7 +26,6 @@ function Profile() {
   };
 
   /** 수정하기 기능 */
-
   // 아바타 이미지 클릭 이벤트
   const handleClickAvatar = () => {
     fileInputRef.current.click();

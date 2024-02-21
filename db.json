@@ -26,6 +26,33 @@
       "userId": "americano",
       "nickname": "아메리카노111",
       "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+    },
+    {
+      "id": "bfb9b7ca-b93a-474c-b140-e7648c39ee6e",
+      "createdAt": "2024-02-21T09:47:53.256Z",
+      "content": "으어어 으어으어",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노222",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+    },
+    {
+      "id": "b470d514-fa8b-40ea-91fe-ac30564dad2b",
+      "createdAt": "2024-02-21T09:53:16.233Z",
+      "content": "ㅁㅁㅁ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노222",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+    },
+    {
+      "id": "c5640f9e-8d0b-4d48-bcf3-2a6869cf12bc",
+      "createdAt": "2024-02-21T09:54:36.463Z",
+      "content": "ㅇㅇㅇ",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노222",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
     }
   ]
 }

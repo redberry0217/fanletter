@@ -94,7 +94,7 @@ const updateLetterSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.error = null;
-        state.letters.push(action.payload);
+        state.letters.unshift(action.payload);
       })
       .addCase(__addLetter.rejected, (state, action) => {
         state.isLoading = false;
