@@ -2,32 +2,86 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Button from 'components/common/Button';
+import { useRef } from 'react';
 
 function Profile() {
-  const { userId, nickname, avatar } = useSelector((state) => state.auth);
+  const { userId, nickname: initialNickname, avatar: initialAvatar } = useSelector((state) => state.auth);
+  const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [avatar, setMyAvatar] = useState(initialAvatar);
+  const [nickname, setNickname] = useState(initialNickname);
 
+  /** 수정하기 버튼 클릭시 */
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
+  /** 수정화면에서 취소하기 버튼 클릭시 */
   const handleCancelClick = () => {
     setIsEditing(false);
   };
+
+  /** 수정하기 기능 */
+
+  // 아바타 이미지 클릭 이벤트
+  const handleClickAvatar = () => {
+    fileInputRef.current.click();
+  };
+
+  // 아바타 이미지 업로드
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      console.log('선택한 파일', file);
+      const fileUrl = URL.createObjectURL(file);
+      setMyAvatar(fileUrl);
+    }
+  };
+
+  const EditCompleteHandler = async () => {
+    try {
+      const editInfo = {
+        nickname: nickname,
+        avatar: avatar
+      };
+      const response = await api.patch('/profile', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      dispatch;
+    } catch (error) {}
+  };
+
   return (
     <ProfileContainer>
       <ProfileTitle>
         <Txt>MOA</Txt>'S PROFILE
       </ProfileTitle>
       <ProfileCard>
-        <MyAvatar>
+        <MyAvatar onClick={handleClickAvatar}>
           <img src={avatar} alt="사용자 아바타" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+          <input
+            type="file"
+            id="fileInput"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
         </MyAvatar>
-        {isEditing ? <input value={nickname} /> : <MyNickname>{nickname}</MyNickname>}
+        {isEditing ? (
+          <input value={nickname} onChange={(e) => setNickname(e.target.value)} />
+        ) : (
+          <MyNickname>{nickname}</MyNickname>
+        )}
         <MyId>id : {userId}</MyId>
         <Btn>
           {isEditing ? <Button onClick={handleCancelClick} text="✖️취소하기" /> : null}
-          {isEditing ? <Button text="✔️저장하기" /> : <Button onClick={handleEditClick} text="✏️수정하기" />}
+          {isEditing ? (
+            <Button text="✔️저장하기" onClick={EditCompleteHandler} />
+          ) : (
+            <Button onClick={handleEditClick} text="✏️수정하기" />
+          )}
         </Btn>
       </ProfileCard>
     </ProfileContainer>
@@ -66,15 +120,9 @@ const ProfileCard = styled.div`
   gap: 10px;
 `;
 
-const LineStyle = styled.div`
-  margin-top: 20px;
-  margin-bottom: 20px;
-  height: 1px;
-  background-color: gray;
-`;
-
 const MyAvatar = styled.div`
   height: 100px;
+  margin: 20px;
 `;
 
 const MyNickname = styled.div`
