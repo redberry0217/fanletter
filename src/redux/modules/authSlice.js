@@ -20,10 +20,10 @@ const authSlice = createSlice({
       state.userId = response.userId;
       state.nickname = response.nickname;
       state.avatar = response.avatar !== null ? response.avatar : defaultIcon;
-      console.log(`로그인성공! 아이디는 ${state.userId}`);
-      console.log(`로그인성공! accessToken ${state.accessToken}`);
-      console.log(`로그인성공! 닉네임은 ${state.nickname}`);
-      console.log(`로그인성공! 아바타는 ${state.avatar}`);
+      // console.log(`로그인성공! 아이디는 ${state.userId}`);
+      // console.log(`로그인성공! accessToken ${state.accessToken}`);
+      // console.log(`로그인성공! 닉네임은 ${state.nickname}`);
+      // console.log(`로그인성공! 아바타는 ${state.avatar}`);
     },
     userLogout: (state) => {
       state.isLoggedIn = false;
@@ -33,7 +33,7 @@ const authSlice = createSlice({
       state.avatar = '';
       localStorage.removeItem('response');
     },
-    userInfoEdit: (state, action) => {
+    editUserInfo: (state, action) => {
       const response = action.payload;
       state.nickname = response.nickname;
       state.avatar = response.avatar;
@@ -42,4 +42,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { userLogin, userLogout, userInfoEdit } = authSlice.actions;
+export const { userLogin, userLogout, editUserInfo } = authSlice.actions;

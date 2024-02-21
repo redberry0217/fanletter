@@ -54,14 +54,11 @@ function Login() {
         id: id,
         password: password
       };
-      const response = await api.post('/login?expiresIn=30m', loginInfo);
+      const response = await api.post('/login', loginInfo);
       dispatch(userLogin(response)); //리덕스에 정보를 보내고 로그인
       localStorage.setItem('response', JSON.stringify(response)); //로컬스토리지에도 저장
 
-      const loginCompleteMsg = () => {
-        toast.success('로그인 되었습니다. 환영합니다!');
-      };
-      loginCompleteMsg();
+      toast.success('로그인 되었습니다. 환영합니다!');
       navigate(`/`);
     } catch (error) {
       toast.error(`로그인에 실패했습니다. 다시 시도해주세요.`);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,19 +9,16 @@ import axios from 'axios';
 function Layout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { accessToken } = useSelector((state) => state.auth);
-  console.log('레이아웃', accessToken);
+  const location = useLocation();
+  const storedResponse = JSON.parse(localStorage.getItem('response'));
+  const accessToken = storedResponse.accessToken;
 
   const logoutHandler = () => {
     dispatch(userLogout());
     navigate(`/`);
   };
 
-  // 정말로 페이지 이동시마다(navigate할 때 마다) useEffect가 실행될 수 있을까??
-  // 예상 : navigate가 DA에 들어가면 될 것이다
-  // 혹시 만약에 안되면, location
   useEffect(() => {
-    console.log('navigate로 변경');
     const checkAccessToken = async () => {
       try {
         await axios.get('https://moneyfulpublicpolicy.co.kr/user', {
@@ -29,9 +26,10 @@ function Layout() {
             Authorization: `Bearer ${accessToken}`
           }
         });
+        console.log(`토큰 잘 살아있어요~`);
       } catch (error) {
         console.error('로그인 확인 실패:', error);
-        navigate(`/login`);
+        navigate(`/`);
       }
     };
     checkAccessToken();

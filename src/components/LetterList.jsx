@@ -5,17 +5,15 @@ import NoLettersYet from './NoLettersYet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormatDate } from 'util/date';
 import { __getLetter } from '../redux/modules/updateLetter';
-import axios from 'axios';
 
 function LetterList({ activeMember }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, error, letters } = useSelector((state) => state.updateLetter);
-  const { accessToken } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(__getLetter());
-  }, [dispatch, accessToken]);
+  }, []);
 
   if (isLoading) {
     return <LoadingMsg>로딩 중...</LoadingMsg>;

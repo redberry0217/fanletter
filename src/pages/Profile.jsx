@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/common/Button';
 import { useRef } from 'react';
 import api from '../axios/api';
-import { userInfoEdit } from '../redux/modules/authSlice';
+import { editUserInfo } from '../redux/modules/authSlice';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 function Profile() {
   const { userId, nickname: initialNickname, avatar: initialAvatar, accessToken } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [avatar, setMyAvatar] = useState(initialAvatar);
+  const [avatar, setAvatar] = useState(initialAvatar);
   const [nickname, setNickname] = useState(initialNickname);
-  const [myfile, setMyfile] = useState(null);
-
+  const [myFile, setMyFile] = useState(null);
   const dispatch = useDispatch();
 
   /** 수정하기 버튼 클릭시 */
@@ -27,7 +29,6 @@ function Profile() {
   };
 
   /** 수정하기 기능 */
-
   // 아바타 이미지 클릭 이벤트
   const handleClickAvatar = () => {
     fileInputRef.current.click();
@@ -37,32 +38,66 @@ function Profile() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      console.log('선택한 파일', file);
       const fileUrl = URL.createObjectURL(file);
-      setMyAvatar(fileUrl);
-      setMyfile(file);
+      setAvatar(fileUrl);
+      setMyFile(file);
     }
   };
 
+  // 정보 수정하기 버튼
   const EditCompleteHandler = async () => {
     try {
       const formData = new FormData();
-      formData.append('avatar', myfile);
+      formData.append('avatar', myFile);
       formData.append('nickname', nickname);
 
-      const response = await api.patch('/profile', formData, {
+      const response = await api.patch(`/profile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`
         }
       });
-      console.log('수정되었을까?', response);
-      dispatch(userInfoEdit({ nickname: nickname, avatar: avatar }));
-      localStorage.setItem('response', JSON.stringify(response));
+
+      const lettersResponse = await axios.get('http://localhost:5000/letters');
+      const letters = lettersResponse.data;
+
+      const userLetters = letters.filter((letter) => letter.userId === userId);
+      userLetters.forEach((letter) => {
+        letter.nickname = response.nickname;
+        letter.avatar = response.avatar;
+      });
+
+      const storedResponse = JSON.parse(localStorage.getItem('response'));
+      if (storedResponse) {
+        const updatedResponse = {
+          ...storedResponse,
+          nickname: response.nickname,
+          avatar: response.avatar
+        };
+        localStorage.setItem('response', JSON.stringify(updatedResponse));
+        dispatch(editUserInfo({ nickname: response.nickname, avatar: response.avatar }));
+      }
+
+      const storedLetters = await axios.get(`http://localhost:5000/letters/?userId=${userId}`);
+      const storedUserLetters = storedLetters.data;
+
+      storedUserLetters.forEach(async (letter) => {
+        try {
+          await axios.patch(`http://localhost:5000/letters/${letter.id}`, {
+            nickname: response.nickname,
+            avatar: response.avatar
+          });
+        } catch (error) {
+          console.error(`게시글 수정 실패 - ID: ${letter.id}`, error);
+        }
+      });
+
+      toast.success(`정보가 수정되었습니다.`);
       setIsEditing(false);
-      console.log('변경된닉네임', nickname);
-      console.log('변경된아바타', avatar);
-    } catch (error) {}
+    } catch (error) {
+      toast.error(`정보 수정에 실패했습니다.`);
+      console.log(error);
+    }
   };
 
   return (
@@ -144,20 +179,6 @@ const MyNickname = styled.div`
 `;
 
 const MyId = styled.div``;
-
-const BlueButton = styled.button`
-  height: 40px;
-  width: 80%;
-  border: none;
-  border-radius: 15px;
-  background-color: #4b85d0;
-  color: white;
-  margin: auto;
-  margin-top: 20px;
-  font-size: 13pt;
-  font-weight: 600;
-  cursor: pointer;
-`;
 
 const Btn = styled.div`
   display: flex;
