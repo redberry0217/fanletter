@@ -9,10 +9,21 @@ import api from '../axios/api';
 
 function Login() {
   const [showLoginForm, setShowLoginForm] = useState(true);
-  const [isValid, setIsValid] = useState(false);
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [formState, setFormState] = useState({
+    id: '',
+    password: '',
+    nickname: ''
+  });
+  const { id, password, nickname } = formState;
+  const isIdValid = id.length >= 4;
+  const isPasswordValid = id.length >= 4;
+  const isNicknameValid = id.length >= 1;
+  const isValid = isIdValid && isPasswordValid && isNicknameValid;
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
 
   // const accessToken = localStorage.getItem('accessToken');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -30,133 +41,83 @@ function Login() {
     setShowLoginForm((prevState) => !prevState);
   };
 
-  const handleIdInput = (e) => {
-    const idValue = e.target.value;
-    setId(idValue);
-    idValue.length >= 4 ? setIsValid(true) : setIsValid(false);
-  };
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    if (showLoginForm) {
+      try {
+        const loginInfo = {
+          id: id,
+          password: password
+        };
+        const response = await api.post('/login?expiresIn=1m', loginInfo);
+        dispatch(userLogin(response)); //리덕스에 정보를 보내고 로그인
+        localStorage.setItem('response', JSON.stringify(response)); //로컬스토리지에도 저장
 
-  const handlePasswordInput = (e) => {
-    const passwordValue = e.target.value;
-    setPassword(passwordValue);
-    passwordValue.length >= 4 ? setIsValid(true) : setIsValid(false);
-  };
-
-  const handleNicknameInput = (e) => {
-    const nicknameValue = e.target.value;
-    setNickname(nicknameValue);
-    nicknameValue.length >= 1 ? setIsValid(true) : setIsValid(false);
-  };
-
-  const loginHandler = async () => {
-    try {
-      const loginInfo = {
-        id: id,
-        password: password
-      };
-      const response = await api.post('/login?expiresIn=1m', loginInfo);
-      dispatch(userLogin(response)); //리덕스에 정보를 보내고 로그인
-      localStorage.setItem('response', JSON.stringify(response)); //로컬스토리지에도 저장
-
-      toast.success('로그인 되었습니다. 환영합니다!');
-      navigate(`/`);
-    } catch (error) {
-      toast.error(`로그인에 실패했습니다. 다시 시도해주세요.`);
-      console.log(error);
-    }
-  };
-
-  const sineupHandler = async () => {
-    try {
-      const newMember = {
-        id: id,
-        password: password,
-        nickname: nickname
-      };
-      await api.post('/register', newMember);
-      const signupCompleteMsg = () => {
-        toast.success('회원가입 완료!');
-        toast.success('이제 로그인해주세요 :)');
-      };
-      signupCompleteMsg();
-      setShowLoginForm((prevState) => !prevState);
-    } catch (error) {
-      toast.error(`회원가입에 실패했습니다. 다시 시도해주세요.`);
-      console.log(error);
+        toast.success('로그인 되었습니다. 환영합니다!');
+        navigate(`/`);
+      } catch (error) {
+        toast.error(`로그인에 실패했습니다. 다시 시도해주세요.`);
+        console.log(error);
+      }
+    } else {
+      try {
+        const newMember = {
+          id: id,
+          password: password,
+          nickname: nickname
+        };
+        await api.post('/register', newMember);
+        const signupCompleteMsg = () => {
+          toast.success('회원가입 완료!');
+          toast.success('이제 로그인해주세요 :)');
+        };
+        signupCompleteMsg();
+        setShowLoginForm((prevState) => !prevState);
+      } catch (error) {
+        toast.error(`회원가입에 실패했습니다. 다시 시도해주세요.`);
+        console.log(error);
+      }
     }
   };
 
   return (
     <LoginPageContainer>
-      {showLoginForm ? (
-        <LoginForm
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <FormTitle>🗝️Login</FormTitle>
-          <StyledInput
-            type="text"
-            value={id}
-            onChange={handleIdInput}
-            placeholder="아이디 (4~10글자)"
-            minLength="4"
-            maxLength="10"
-          />
-          <StyledInput
-            type="password"
-            value={password}
-            onChange={handlePasswordInput}
-            placeholder="비밀번호 (4~15글자)"
-            minLength="4"
-            maxLength="15"
-          />
-          <BlueButton type="submit" onClick={loginHandler} style={{ backgroundColor: isValid ? '#4b85d0' : '#c2c2c2' }}>
-            로그인
-          </BlueButton>
-          <LetsSignup onClick={toggleForm}>회원가입</LetsSignup>
-        </LoginForm>
-      ) : (
-        <SignupForm
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <FormTitle>✨Sign Up</FormTitle>
-          <StyledInput
-            type="text"
-            value={id}
-            onChange={handleIdInput}
-            placeholder="아이디 (4~10글자)"
-            minLength="4"
-            maxLength="10"
-          />
-          <StyledInput
-            type="password"
-            value={password}
-            onChange={handlePasswordInput}
-            placeholder="비밀번호 (4~15글자)"
-            minLength="4"
-            maxLength="15"
-          />
+      <LoginForm onSubmit={onSubmitHandler}>
+        <FormTitle>{showLoginForm ? '🗝️Login' : '✨Sign Up'}</FormTitle>
+        <StyledInput
+          type="text"
+          value={id}
+          name="id"
+          onChange={onChangeHandler}
+          placeholder="아이디 (4~10글자)"
+          minLength="4"
+          maxLength="10"
+        />
+        <StyledInput
+          type="password"
+          value={password}
+          name="password"
+          onChange={onChangeHandler}
+          placeholder="비밀번호 (4~15글자)"
+          minLength="4"
+          maxLength="15"
+        />
+        {!showLoginForm && (
           <StyledInput
             type="text"
             value={nickname}
-            onChange={handleNicknameInput}
+            name="nickname"
+            onChange={onChangeHandler}
             placeholder="닉네임 (1~10글자)"
             minLength="1"
             maxLength="10"
           />
-          <BlueButton
-            type="submit"
-            onClick={sineupHandler}
-            style={{ backgroundColor: isValid ? '#4b85d0' : '#c2c2c2' }}
-          >
-            회원가입
-          </BlueButton>
-          <LetsSignup onClick={toggleForm}>로그인</LetsSignup>
-        </SignupForm>
-      )}
+        )}
+        <BlueButton type="submit" style={{ backgroundColor: isValid ? '#4b85d0' : '#c2c2c2' }}>
+          {showLoginForm ? '로그인' : '회원가입'}
+        </BlueButton>
+        <LetsSignup onClick={toggleForm}>{showLoginForm ? '회원가입' : '로그인'}</LetsSignup>
+      </LoginForm>
     </LoginPageContainer>
   );
 }
@@ -197,6 +158,7 @@ const StyledInput = styled.input`
   padding-left: 10px;
   border-width: 0 0 1px;
   font-size: 13pt;
+  outline: none;
 `;
 
 const BlueButton = styled.button`
@@ -219,17 +181,10 @@ const LetsSignup = styled.span`
   font-weight: 600;
   color: gray;
   cursor: pointer;
+  user-select: none;
+  &:hover {
+    color: #4b85d0;
+  }
 `;
 
-const SignupForm = styled.form`
-  background-color: white;
-  width: 600px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  gap: 10px;
-`;
 export default Login;
