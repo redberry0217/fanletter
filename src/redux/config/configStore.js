@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import updateLetter from '../modules/updateLetter';
+import updateLetter from '../modules/letterSlice';
 import auth from '../modules/authSlice';
 
 const store = configureStore({
