@@ -1,94 +1,67 @@
 {
   "letters": [
     {
-      "id": "f714942d-08cd-40f9-b948-7bdecb984b18",
-      "createdAt": "2024-02-21T03:34:47.994Z",
-      "content": "ㅇㅇㅇ",
-      "writedTo": "SOOBIN",
-      "userId": "cafemocha",
-      "nickname": "카페모카",
-      "avatar": "/static/media/user_icon.269aeae61bf344d75935.png"
-    },
-    {
-      "id": "3798465c-3394-4b0d-b2a8-105eb2fba146",
-      "createdAt": "2024-02-21T08:30:47.224Z",
-      "content": "asd",
+      "id": "762b0590-9e18-4d09-8723-8720013591e2",
+      "createdAt": "2024-02-22T03:55:52.846Z",
+      "content": "오늘 트위터 새로 올라온 사진 보고 광대 폭발했다가 그냥 바로 오열 ㅠㅠㅠㅠㅠㅠㅠ",
       "writedTo": "SOOBIN",
       "userId": "americano",
-      "nickname": "아메리카노111",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+      "nickname": "말랑뽀짝최수빈",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/37221ec7-cd65-4317-9853-a92b89c7bba9.jpg"
     },
     {
-      "id": "bfb3f527-2bc2-4bf6-8463-f67563809cad",
-      "createdAt": "2024-02-21T09:38:48.266Z",
-      "content": "111",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노111",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
+      "id": "e00eadf9-f77c-490a-b1d1-9cc29c0c3a46",
+      "createdAt": "2024-02-22T03:58:02.861Z",
+      "content": "우리 범규 핑크머리 해줬으면 좋겠따..... 진짜 요정 그자체일듯",
+      "writedTo": "BEOMGYU",
+      "userId": "cafelatte",
+      "nickname": "범규용안",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/5b15744e-3437-4973-964c-4ddd8973ef7e.jpg"
     },
     {
-      "id": "bfb9b7ca-b93a-474c-b140-e7648c39ee6e",
-      "createdAt": "2024-02-21T09:47:53.256Z",
-      "content": "으어어 으어으어",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노222",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
-    },
-    {
-      "id": "b470d514-fa8b-40ea-91fe-ac30564dad2b",
-      "createdAt": "2024-02-21T09:53:16.233Z",
-      "content": "ㅁㅁㅁ",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노222",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
-    },
-    {
-      "id": "c5640f9e-8d0b-4d48-bcf3-2a6869cf12bc",
-      "createdAt": "2024-02-21T09:54:36.463Z",
-      "content": "ㅇㅇㅇ",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노222",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/09a672a2-3bd6-4a4e-ab14-c9a9e3fdf63d.jpg"
-    },
-    {
-      "id": "f2d918a2-8eba-472d-b805-b369343e79d3",
-      "createdAt": "2024-02-21T10:53:42.792Z",
-      "content": "ddd",
-      "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노777",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/4e26650a-c471-48f9-aed3-0e76f9af48c3.jpg"
-    },
-    {
-      "id": "8ee2c6c6-b538-4984-9dbc-b2932426e244",
-      "createdAt": "2024-02-21T11:26:16.188Z",
-      "content": "으어어 거의 다돼가는듯 ㅠ",
+      "id": "c60638e4-9ee6-422a-a9e6-6d5b2af0417e",
+      "createdAt": "2024-02-22T03:58:26.235Z",
+      "content": "수빈아 안녕💚💚💚💚",
       "writedTo": "SOOBIN",
       "userId": "cafelatte",
-      "nickname": "카페라떼",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/5b5fad95-3680-4ed0-94d0-76ea0469772a.jpg"
+      "nickname": "범규용안",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/5b15744e-3437-4973-964c-4ddd8973ef7e.jpg"
     },
     {
-      "id": "cbaa2eab-faa5-40f9-9350-a6c1d66f5768",
-      "createdAt": "2024-02-22T02:10:15.000Z",
-      "content": "룰루루",
+      "id": "501f1ecd-e7dd-409b-8765-a8de84df3419",
+      "createdAt": "2024-02-22T04:02:11.054Z",
+      "content": "이번 컨포 진짜 미쳤다 봤던 사진 또보고 또보고 정신차리니까 새벽3시됨... 현생 버려",
       "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/b596b98c-023e-4ba7-961d-47f452731ac2.jpg"
+      "userId": "cafemocha",
+      "nickname": "투바투사랑해",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/6481db82-9e1f-409a-9bab-8c53a042315a.jpg"
     },
     {
-      "id": "498b0c17-bb38-4c45-99b4-b471a6108800",
-      "createdAt": "2024-02-22T02:38:19.478Z",
-      "content": "새로운 글 작성!",
+      "id": "3fa802c6-d2ae-4987-a99f-5487f78a61ff",
+      "createdAt": "2024-02-22T04:02:44.772Z",
+      "content": "최연준 사랑한다 알겠냐",
+      "writedTo": "YEONJUN",
+      "userId": "cafemocha",
+      "nickname": "투바투사랑해",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/6481db82-9e1f-409a-9bab-8c53a042315a.jpg"
+    },
+    {
+      "id": "cb6810ae-ceec-4add-8b0e-8e4226c70c6b",
+      "createdAt": "2024-02-22T04:07:11.613Z",
+      "content": "연주나 다음엔 마스크 벗어줘....너의 잘생긴미모가다 없어지자나..",
       "writedTo": "SOOBIN",
-      "userId": "americano",
-      "nickname": "아메리카노",
-      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/b596b98c-023e-4ba7-961d-47f452731ac2.jpg"
+      "userId": "smoothie",
+      "nickname": "BUNNY_BOO",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/00d26b1a-3ed1-4d82-be8b-8fbffa2f6add.jpg"
+    },
+    {
+      "id": "bd4a83ed-bf96-425c-b098-007b48ba1b8d",
+      "createdAt": "2024-02-22T04:15:05.631Z",
+      "content": "팬 중 하나가 아내가 될 수 있다고 생각한 적이 있습니까??일어날 수 있으니 각오해라",
+      "writedTo": "SOOBIN",
+      "userId": "cafemocha",
+      "nickname": "투바투사랑해",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-22/6481db82-9e1f-409a-9bab-8c53a042315a.jpg"
     }
   ]
 }

@@ -107,7 +107,7 @@ function Profile() {
       </ProfileTitle>
       <ProfileCard>
         <MyAvatar onClick={handleClickAvatar}>
-          <img src={avatar} alt="사용자 아바타" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+          <img src={avatar} alt="사용자 아바타" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
           <input
             type="file"
             id="fileInput"
@@ -121,7 +121,7 @@ function Profile() {
         ) : (
           <MyNickname>{nickname}</MyNickname>
         )}
-        <MyId>id : {userId}</MyId>
+        <MyId>login id : {userId}</MyId>
         <Btn>
           {isEditing ? <Button onClick={handleCancelClick} text="✖️취소하기" /> : null}
           {isEditing ? (
@@ -157,7 +157,7 @@ const ProfileCard = styled.div`
   background-color: #ffffff;
   border-radius: 15px;
   width: 700px;
-  height: 350px;
+  height: 400px;
   margin: 35px;
   padding: 30px;
   display: flex;

@@ -49,7 +49,7 @@ function Login() {
           id: id,
           password: password
         };
-        const response = await api.post('/login?expiresIn=1m', loginInfo);
+        const response = await api.post('/login?expiresIn=10m', loginInfo);
         dispatch(userLogin(response)); //리덕스에 정보를 보내고 로그인
         localStorage.setItem('response', JSON.stringify(response)); //로컬스토리지에도 저장
 

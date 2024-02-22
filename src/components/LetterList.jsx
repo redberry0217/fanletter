@@ -37,7 +37,7 @@ function LetterList({ activeMember }) {
         filteredLetters.map((letter) => (
           <LetterCard key={letter.id} onClick={() => handleCardClick(letter.id)}>
             <div>
-              <img src={letter.avatar} alt="사용자 아바타" width="70" style={{ borderRadius: '50%' }} />
+              <img src={letter.avatar} alt="사용자 아바타" width="70" height="70" style={{ borderRadius: '50%' }} />
             </div>
             <CardContent>
               <NickName>{letter.nickname}</NickName>
