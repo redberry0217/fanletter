@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import NoLettersYet from './NoLettersYet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormatDate } from 'util/date';
-import { __getLetter } from '../redux/modules/updateLetter';
+import { __getLetter } from '../redux/modules/letterSlice';
 
 function LetterList({ activeMember }) {
   const navigate = useNavigate();

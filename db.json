@@ -71,6 +71,24 @@
       "userId": "cafelatte",
       "nickname": "카페라떼",
       "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/5b5fad95-3680-4ed0-94d0-76ea0469772a.jpg"
+    },
+    {
+      "id": "cbaa2eab-faa5-40f9-9350-a6c1d66f5768",
+      "createdAt": "2024-02-22T02:10:15.000Z",
+      "content": "룰루루",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/b596b98c-023e-4ba7-961d-47f452731ac2.jpg"
+    },
+    {
+      "id": "498b0c17-bb38-4c45-99b4-b471a6108800",
+      "createdAt": "2024-02-22T02:38:19.478Z",
+      "content": "새로운 글 작성!",
+      "writedTo": "SOOBIN",
+      "userId": "americano",
+      "nickname": "아메리카노",
+      "avatar": "https://react-jwt-avatar.s3.ap-northeast-2.amazonaws.com/24-02-21/b596b98c-023e-4ba7-961d-47f452731ac2.jpg"
     }
   ]
 }

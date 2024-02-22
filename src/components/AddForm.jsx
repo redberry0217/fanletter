@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import Button from './common/Button';
-import { __addLetter } from '../redux/modules/updateLetter';
+import { __addLetter } from '../redux/modules/letterSlice';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { userLogout } from '../redux/modules/authSlice';
 
 function AddForm({ setActiveMember }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [writedTo, setWritedTo] = useState('SOOBIN');
   const [content, setContent] = useState('');
   const { nickname, userId, avatar } = useSelector((state) => state.auth);
@@ -47,7 +46,8 @@ function AddForm({ setActiveMember }) {
         }
       } catch (error) {
         console.error('로그인 확인 실패:', error);
-        navigate(`/login`);
+        toast.warning(`로그인이 만료됐어요. 재로그인 해주세요!`);
+        dispatch(userLogout());
       }
     };
     checkAccessToken();

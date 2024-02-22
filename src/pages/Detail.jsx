@@ -4,8 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import WriterDetail from 'components/WriterDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/common/Button';
-import { __deleteLetter } from '../redux/modules/updateLetter';
-import { __modifyLetter } from '../redux/modules/updateLetter';
+import { __deleteLetter, __modifyLetter } from '../redux/modules/letterSlice';
 import { toast } from 'react-toastify';
 
 function Detail() {
