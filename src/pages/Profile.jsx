@@ -25,13 +25,19 @@ function Profile() {
 
   /** 수정화면에서 취소하기 버튼 클릭시 */
   const handleCancelClick = () => {
-    setIsEditing(false);
+    if (window.confirm(`정보 수정을 취소하시겠습니까?`)) {
+      setIsEditing(false);
+    } else {
+      return;
+    }
   };
 
   /** 수정하기 기능 */
   // 아바타 이미지 클릭 이벤트
   const handleClickAvatar = () => {
-    fileInputRef.current.click();
+    if (isEditing) {
+      fileInputRef.current.click();
+    }
   };
 
   // 아바타 이미지 업로드
@@ -107,7 +113,7 @@ function Profile() {
       </ProfileTitle>
       <ProfileCard>
         <MyAvatar onClick={handleClickAvatar}>
-          <img src={avatar} alt="사용자 아바타" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+          <AvatarImage src={avatar} alt="사용자 아바타" />
           <input
             type="file"
             id="fileInput"
@@ -170,6 +176,12 @@ const ProfileCard = styled.div`
 const MyAvatar = styled.div`
   height: 150px;
   margin: 20px;
+`;
+
+const AvatarImage = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 `;
 
 const MyNickname = styled.div`
